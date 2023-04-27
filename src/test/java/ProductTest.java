@@ -11,6 +11,33 @@ public class ProductTest {
     ShopRepository repo = new ShopRepository();
 
     @Test
+    public void removeTestExist() {
+
+
+        repo.add(item1);
+        repo.add(item2);
+        repo.add(item3);
+
+        repo.remove(2);
+
+        Product[] expected = {item1, item3};
+        Product[] actual = repo.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void removeTestNotExist() {
+
+        repo.add(item1);
+        repo.add(item2);
+        repo.add(item3);
+
+        Assertions.assertThrows(NotFoundException.class,
+                () -> repo.remove(4));
+    }
+
+    @Test
     public void testFindWithinId() {
 
         repo.add(item1);
@@ -19,7 +46,6 @@ public class ProductTest {
 
         Product [] expected = {item3};
         Product [] actual = new Product[]{repo.findById(3)};
-
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -39,7 +65,7 @@ public class ProductTest {
     }
 
     @Test
-    public void test3() {
+    public void removeByIdTestOverId() {
 
         ShopRepository repo = new ShopRepository();
 
@@ -47,9 +73,24 @@ public class ProductTest {
         repo.add(item2);
         repo.add(item3);
 
-        Product[] expected = {item1, item2};
-        Product[] actual = new Product[]{repo.removeById(3)};
+        Assertions.assertThrows(NotFoundException.class,
+                () -> repo.removeById(4));
+    }
+
+    @Test
+    public void removeByIdTestWithinId() {
+
+        ShopRepository repo = new ShopRepository();
+
+        repo.add(item1);
+        repo.add(item2);
+        repo.add(item3);
+        repo.remove(2);
+
+        Product[] expected = {item1, item3};
+        Product[] actual = repo.findAll();
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
 }
