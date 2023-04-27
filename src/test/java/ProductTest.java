@@ -44,8 +44,8 @@ public class ProductTest {
         repo.add(item2);
         repo.add(item3);
 
-        Product [] expected = {item3};
-        Product [] actual = new Product[]{repo.findById(3)};
+        Product[] expected = {item3};
+        Product[] actual = new Product[]{repo.findById(3)};
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -57,8 +57,8 @@ public class ProductTest {
         repo.add(item2);
         repo.add(item3);
 
-        Product [] expected = {null};
-        Product [] actual = new Product[]{repo.findById(4)};
+        Product[] expected = {null};
+        Product[] actual = new Product[]{repo.findById(4)};
 
 
         Assertions.assertArrayEquals(expected, actual);
